@@ -1,4 +1,9 @@
-const { coursesGet, coursesPost, coursesPut } = require('./queries')
+const {
+	coursesGet,
+	coursesPost,
+	coursesPut,
+	coursesDelete,
+} = require('./queries')
 
 const getCourses = async (req, res) => {
 	try {
@@ -30,4 +35,14 @@ const putCourses = async (req, res) => {
 	}
 }
 
-module.exports = { getCourses, postCourses, putCourses }
+const deleteCourse = async (req, res) => {
+	const { id } = req.params
+	try {
+		const response = await coursesDelete(id)
+		res.json(response)
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+module.exports = { getCourses, postCourses, putCourses, deleteCourse }
